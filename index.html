@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+</head>
+<body>
+<input type="text" id="cityInput"  placeholder ="City...">
+<button class="searchBtn">Search</button>
+
+<div id="result"></div>
+<div id="error" style="display: none;"></div>
+
+  <script>
+const cityInput = document.querySelector("#cityInput");
+const searchBtn = document.querySelector(".searchBtn");
+const result = document.querySelector("#result");
+const error = document.querySelector("#error");
+
+const apiKey = '53916936a41da74bef7210102adb4b0b';  //get api key
+
+
+searchBtn.addEventListener("click", function(){
+const cityName = cityInput.value; // cityname = what is put in the input.
+console.log("The user entered:", cityName);
+
+const url = (`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`);
+console.log('The url is', url)
+
+
+fetch(url)
+.then(response=> response.json())
+
+
+.then(data =>{
+  console.log(data);
+
+const temperature = data.main.temperature;
+const city = data.name;
+const description = data.weather[0].description;
+
+result.textContent = `${city} is ${temperature}°C, $${description}`;
+result.style.display = "block";
+
+})
+
+
+.catch(error=> console.log(error));
+
+});
+
+getWeather(cityName);
+weather = data.name;
+display.weather();
+
+
+    
+  </script>
+</body>
+</html>
+
+Step 9: Display temperature (15 min)
+
+Get temperature from data: data.main.temp
+Get city name from data: data.name
+Display: "Temperature in London: 15°C"
+Test: Search, see temperature appear
