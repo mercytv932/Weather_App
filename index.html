@@ -20,7 +20,6 @@ const error = document.querySelector("#error");
 
 const apiKey = '53916936a41da74bef7210102adb4b0b';  //get api key
 
-
 searchBtn.addEventListener("click", function(){
 const cityName = cityInput.value; // cityname = what is put in the input.
 console.log("The user entered:", cityName);
@@ -30,39 +29,43 @@ console.log('The url is', url)
 
 
 fetch(url)
-.then(response=> response.json())
+.then(response=>{
 
+  if(response.ok){
+  return response.json()
+  }
 
-.then(data =>{
-  console.log(data);
+  if(!response.ok){
+    error.textContent = "City not found";
+    error.style.display = "block";
+    result.style.display = "none"; 
+    throw new Error("City not found");
 
-const temperature = data.main.temperature;
-const city = data.name;
-const description = data.weather[0].description;
-
-result.textContent = `${city} is ${temperature}°C, $${description}`;
-result.style.display = "block";
+  }
 
 })
 
+.then(data =>{
+
+error.style.display = "none";// hide city error messages when city name is valid
+
+  console.log(data);
+
+
+const temperature = data.main.temp;
+const city = data.name;
+const description = data.weather[0].description;
+
+result.textContent = `${city}: ${temperature}°C,  ${description}`; // placed  in result div..
+result.style.display = "block"; //makes the result div visible on the page.
+
+cityInput.value = "";
+})
 
 .catch(error=> console.log(error));
 
 });
-
-getWeather(cityName);
-weather = data.name;
-display.weather();
-
-
     
   </script>
 </body>
 </html>
-
-Step 9: Display temperature (15 min)
-
-Get temperature from data: data.main.temp
-Get city name from data: data.name
-Display: "Temperature in London: 15°C"
-Test: Search, see temperature appear
