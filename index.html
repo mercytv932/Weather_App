@@ -4,13 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
+
+<style>
+body, html{
+  margin: 0;
+  height: 100vh;
+}
+
+.container{  
+  background-color: aquamarine;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  justify-content: center; /*centers horizontally*/
+  align-items: center; /*centers*/
+  padding: 12px;
+  place-items: center;
+  margin-top: 150px;
+}
+
+.searchBtn{
+  border-radius: 5px;
+  background-color: rgb(154, 208, 255);
+  cursor: pointer;
+}
+
+.searchBtn:hover{
+  text-decoration: underline;
+  text-decoration: solid;
+}
+
+#cityInput{
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+}
+
+</style>
+
 </head>
 <body>
-<input type="text" id="cityInput"  placeholder ="City...">
+
+<h2 class="h2">Check Weather</h2>
+
+<div class="container">
+  <input type="text" id="cityInput"  placeholder ="City...">
 <button class="searchBtn">Search</button>
 
 <div id="result"></div>
-<div id="error" style="display: none;"></div>
+<div id="error" style="display: none;"></div>    
+
+</div>
 
   <script>
 const cityInput = document.querySelector("#cityInput");
